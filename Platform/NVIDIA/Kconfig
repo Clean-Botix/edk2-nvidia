@@ -829,7 +829,7 @@ menu "Boot Options"
   config BOOT_DEFAULT_TIMEOUT
   int "Boot timeout"
   depends on SINGLE_BOOT_NONE
-  default 5
+  default 2
   help
     UEFI boot timeout
 
