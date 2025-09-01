@@ -769,7 +769,7 @@ endmenu
 
 menuconfig SHELL
 bool "UEFI Shell support"
-default y
+default n
 help
   Support for UEFI shell in the main UEFI firmware image
 
