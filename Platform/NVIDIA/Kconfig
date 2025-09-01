@@ -351,13 +351,13 @@ menu "Boot Options"
 
   config BOOT_QUICK_BOOT
   bool "Quick boot support"
-  default n
+  default y
   help
     UEFI quick boot supported
 
   config BOOT_QUICK_BOOT_ENABLED
   bool "Quick boot default enabled"
-  default n
+  default y
   depends on BOOT_QUICK_BOOT
   help
     UEFI quick boot supported
