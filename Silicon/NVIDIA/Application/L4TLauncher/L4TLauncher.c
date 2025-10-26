@@ -1812,11 +1812,13 @@ ProcessBootParams (
     }
   }
 
+  // WORKAROUND: commenting out rootfs validation for disabling recovery boot mechanism
+  // See: https://forums.developer.nvidia.com/t/jp5-1-2-how-to-disable-uefi-trying-recovery-boot/295225/3
   // Find valid Rootfs Chain. If not, select recovery kernel
-  Status = ValidateRootfsStatus (BootParams);
-  if (EFI_ERROR (Status)) {
-    ErrorPrint (L"Failed to validate rootfs status: %r\r\n", Status);
-  }
+  // Status = ValidateRootfsStatus (BootParams);
+  // if (EFI_ERROR (Status)) {
+  //   ErrorPrint (L"Failed to validate rootfs status: %r\r\n", Status);
+  // }
 
   // Store the current boot chain in volatile variable to allow chain loading
   Status = gRT->SetVariable (BOOT_OS_VARIABLE_NAME, &gNVIDIAPublicVariableGuid, EFI_VARIABLE_BOOTSERVICE_ACCESS|EFI_VARIABLE_RUNTIME_ACCESS, sizeof (BootParams->BootChain), &BootParams->BootChain);
