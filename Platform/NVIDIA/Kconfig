@@ -461,6 +461,45 @@ menu "Boot Options"
        800x600
   endchoice
 
+  config GOP_ROTATE
+    bool "Enable GOP Screen Rotation Support"
+    default n
+    help
+      Enable the GopRotate driver to rotate the Graphics Output Protocol
+      display. This allows rotating the screen by 0, 90, 180, or 270 degrees.
+
+  if GOP_ROTATE
+    choice GOP_ROTATION_ANGLE
+      prompt "Screen Rotation Angle"
+      default GOP_ROTATION_0
+      help
+        Select the default screen rotation angle in degrees clockwise.
+    config GOP_ROTATION_0
+      bool "0 degrees (No rotation)"
+      help
+        No rotation - normal landscape orientation.
+    config GOP_ROTATION_90
+      bool "90 degrees clockwise"
+      help
+        Rotate screen 90 degrees clockwise (portrait mode).
+    config GOP_ROTATION_180
+      bool "180 degrees"
+      help
+        Rotate screen 180 degrees (upside down).
+    config GOP_ROTATION_270
+      bool "270 degrees clockwise"
+      help
+        Rotate screen 270 degrees clockwise (90 degrees counter-clockwise).
+    endchoice
+
+    config GOP_ROTATION_VALUE
+      int
+      default 0 if GOP_ROTATION_0
+      default 1 if GOP_ROTATION_270
+      default 2 if GOP_ROTATION_180
+      default 3 if GOP_ROTATION_90
+  endif # GOP_ROTATE
+
   config LOGO
   bool "Boot Logo Support"
   default y

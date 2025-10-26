@@ -43,9 +43,10 @@
 
 [Protocols]
   gEdkiiPlatformLogoProtocolGuid
+  gEfiGraphicsOutputProtocolGuid  ## CONSUMES
 
 [UserExtensions.TianoCore."ExtraFiles"]
   LogoDxeExtra.uni
 
 [Depex]
-  TRUE
+  gEfiGraphicsOutputProtocolGuid

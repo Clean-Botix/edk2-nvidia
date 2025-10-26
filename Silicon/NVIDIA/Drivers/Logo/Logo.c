@@ -63,6 +63,13 @@ GetImage (
     return Status;
   }
 
+  DEBUG ((
+    DEBUG_INFO,
+    "Logo: GOP Resolution: %ux%u\n",
+    GraphicsOutput->Mode->Info->HorizontalResolution,
+    GraphicsOutput->Mode->Info->VerticalResolution
+    ));
+
   *Attribute = EdkiiPlatformLogoDisplayAttributeCenter;
   *OffsetX   = 0;
   *OffsetY   = 0;
@@ -95,10 +102,21 @@ GetImage (
         (PixelHeight < SelectedHeight) ||
         (PixelWidth < SelectedWidth))
     {
+      DEBUG ((
+        DEBUG_VERBOSE,
+        "Logo %ux%u rejected: %s\n",
+        PixelWidth,
+        PixelHeight,
+        (PixelHeight > GraphicsOutput->Mode->Info->VerticalResolution) ? "too tall" :
+        (PixelWidth > GraphicsOutput->Mode->Info->HorizontalResolution) ? "too wide" :
+        "smaller than previous"
+        ));
       gBS->FreePool (GopBlt);
       GopBlt = NULL;
       continue;
     }
+
+    DEBUG ((DEBUG_INFO, "Logo: Selected %ux%u image\n", PixelWidth, PixelHeight));
 
     SelectedHeight = PixelHeight;
     SelectedWidth  = PixelWidth;

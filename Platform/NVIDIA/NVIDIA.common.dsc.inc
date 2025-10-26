@@ -931,6 +931,13 @@ gEfiSecurityPkgTokenSpaceGuid.PcdSingleBootApplicationGuid|{ GUID("cbf481fb-b373
   gNVIDIATokenSpaceGuid.PcdL4TConfigurationSupport|TRUE
 !endif
 
+  #
+  # GOP Rotate Driver (for screen rotation)
+  #
+!ifdef CONFIG_GOP_ROTATE
+  gGopRotatePkgGuid.DefaultGopRotation|$(CONFIG_GOP_ROTATION_VALUE)
+!endif
+
 !ifdef CONFIG_NVIDIA_DISPLAY
   gNVIDIATokenSpaceGuid.PcdNvGopSupported|TRUE
 !endif
@@ -1502,6 +1509,13 @@ gEfiSecurityPkgTokenSpaceGuid.PcdSingleBootApplicationGuid|{ GUID("cbf481fb-b373
   #
   Silicon/NVIDIA/Drivers/IpmiBlobTransferDxe/IpmiBlobTransferDxe.inf
   Silicon/NVIDIA/Drivers/SmbiosBmcTransfer/SmbiosBmcTransfer.inf
+!endif
+
+  #
+  # GOP Rotate Driver (for screen rotation)
+  #
+!ifdef CONFIG_GOP_ROTATE
+  GopRotatePkg/GopRotate/GopRotate.inf
 !endif
 
   #
