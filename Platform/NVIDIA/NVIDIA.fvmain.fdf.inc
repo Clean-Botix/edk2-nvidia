@@ -228,13 +228,6 @@ FvNameGuid         = $(PLATFORM_GUID)
 !endif
 
   #
-  # GOP Rotate Driver (for screen rotation)
-  #
-!ifdef CONFIG_GOP_ROTATE
-  INF GopRotatePkg/GopRotate/GopRotate.inf
-!endif
-
-  #
   # Logo support
   #
 !ifdef CONFIG_LOGO
@@ -927,3 +920,4 @@ FvNameGuid         = $(PLATFORM_GUID)
 !ifdef CONFIG_SERVER_POWER_CONTROLLERS
   INF Silicon/NVIDIA/Drivers/ServerPowerControlDxe/ServerPowerControlDxe.inf
 !endif
+

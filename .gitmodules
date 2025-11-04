@@ -1,4 +1,0 @@
-[submodule "GopRotatePkg"]
-	path = GopRotatePkg
-	url = https://github.com/Tectrix-Cleanlogix/GopRotate
-	branch = optimusclean
