@@ -2620,7 +2620,7 @@ PlatformBootManagerAfterConsole (
   // Display system and hotkey information after console is ready.
   //
   if (!PlatformGetSingleBootApp (NULL)) {
-    DisplaySystemAndHotkeyInformation ();
+    // DisplaySystemAndHotkeyInformation ();
   }
 
   //
