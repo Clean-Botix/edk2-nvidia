@@ -2358,7 +2358,7 @@ PlatformBootManagerAfterConsole (
   // Display system and hotkey information after console is ready.
   //
   if (!FeaturePcdGet (PcdSingleBootSupport)) {
-    DisplaySystemAndHotkeyInformation ();
+    // DisplaySystemAndHotkeyInformation ();
   }
 
   //
