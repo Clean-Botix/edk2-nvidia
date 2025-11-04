@@ -98,6 +98,7 @@
   gNVIDIATokenSpaceGuid.PcdUefiShellEnabled
   gNVIDIATokenSpaceGuid.PcdEnumerationTimeoutMs
   gNVIDIATokenSpaceGuid.PcdBootManagerConOutAttributes
+  gNVIDIATokenSpaceGuid.PcdL4TLauncherQuietMode
 
 [Guids]
   gEfiFileInfoGuid

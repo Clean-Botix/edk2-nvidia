@@ -516,6 +516,9 @@
 #Single Launch Application
   gNVIDIATokenSpaceGuid.PcdSingleBootSupport|FALSE|BOOLEAN|0x00010000
 
+#L4T Launcher Quiet Mode - Logo only, no text
+  gNVIDIATokenSpaceGuid.PcdL4TLauncherQuietMode|FALSE|BOOLEAN|0x00010003
+
 #No Corrected Errors in HEST ACPI
   gNVIDIATokenSpaceGuid.PcdNoCorrectedErrorsInHest|FALSE|BOOLEAN|0x00000116
 

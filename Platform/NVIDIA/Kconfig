@@ -901,6 +901,13 @@ menu "Boot Options"
   config BOOT_UI_MENU_DISABLED
   bool "UI Menu Application disabled"
 
+  config L4T_LAUNCHER_QUIET_MODE
+  bool "L4T Launcher quiet mode (logo only)"
+  default n
+  help
+    Suppress all text output from L4T Launcher and platform boot manager,
+    showing only the logo on boot screen for a clean visual experience.
+
   config L4T_LAUNCHER_IN_FV
   bool
 

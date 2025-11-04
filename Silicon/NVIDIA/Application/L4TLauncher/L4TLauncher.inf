@@ -51,6 +51,10 @@
   gEfiSecureBootEnableDisableGuid
   gNVIDIATokenSpaceGuid
 
+[Pcd]
+  gNVIDIATokenSpaceGuid.PcdL4TLauncherQuietMode
+
+
 [Protocols]
   gEfiLoadedImageProtocolGuid
   gEfiDevicePathProtocolGuid
