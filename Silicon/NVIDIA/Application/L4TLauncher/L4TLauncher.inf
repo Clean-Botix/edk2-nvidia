@@ -59,6 +59,7 @@
 [Pcd]
   gNVIDIATokenSpaceGuid.PcdRcmKernelBase
   gNVIDIATokenSpaceGuid.PcdRcmKernelSize
+  gNVIDIATokenSpaceGuid.PcdL4TLauncherQuietMode
 
 [Protocols]
   gEfiLoadedImageProtocolGuid

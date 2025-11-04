@@ -92,6 +92,7 @@
   gNVIDIATokenSpaceGuid.PcdTpmEnable
   gNVIDIATokenSpaceGuid.PcdMemoryTest
   gNVIDIATokenSpaceGuid.PcdSingleBootSupport
+  gNVIDIATokenSpaceGuid.PcdL4TLauncherQuietMode
   gEfiSecurityPkgTokenSpaceGuid.PcdSingleBootApplicationGuid
 
 [Guids]

@@ -622,6 +622,9 @@ CONFIG_ARM_WATCHDOG_INTERRUPT=0
 !ifndef CONFIG_SINGLE_BOOT_NONE
   gNVIDIATokenSpaceGuid.PcdSingleBootSupport|TRUE
 !endif
+!ifdef CONFIG_L4T_LAUNCHER_QUIET_MODE
+  gNVIDIATokenSpaceGuid.PcdL4TLauncherQuietMode|TRUE
+!endif
   gEmbeddedTokenSpaceGuid.PcdAndroidBootLoadFile2|TRUE
 
 !ifdef CONFIG_REDFISH

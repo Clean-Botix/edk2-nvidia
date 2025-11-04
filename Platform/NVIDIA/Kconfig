@@ -412,6 +412,13 @@ menu "Boot Options"
   depends on SINGLE_BOOT_DEADLOOP_APP || SINGLE_BOOT_L4T_LAUNCHER
   bool "UI Menu Application disabled"
 
+  config L4T_LAUNCHER_QUIET_MODE
+  bool "L4T Launcher quiet mode (logo only)"
+  default n
+  help
+    Suppress all text output from L4T Launcher and platform boot manager,
+    showing only the logo on boot screen for a clean visual experience.
+
   choice SOC_DISPLAY_HANDOFF_MODE
     prompt "SOC Display Hand-Off Mode"
     help

@@ -2357,8 +2357,10 @@ PlatformBootManagerAfterConsole (
   //
   // Display system and hotkey information after console is ready.
   //
-  if (!FeaturePcdGet (PcdSingleBootSupport)) {
-    // DisplaySystemAndHotkeyInformation ();
+  if (!FeaturePcdGet (PcdL4TLauncherQuietMode) &&
+      !FeaturePcdGet (PcdSingleBootSupport))
+  {
+    DisplaySystemAndHotkeyInformation ();
   }
 
   //
