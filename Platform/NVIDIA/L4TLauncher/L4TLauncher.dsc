@@ -16,6 +16,9 @@
 !include Platform/NVIDIA/NVIDIA.global.dsc.inc
 
 [Defines]
+
+!include config.dsc.inc
+
   PLATFORM_NAME               = $(BUILD_NAME)
   SKUID_IDENTIFIER            = ALL
   PLATFORM_VERSION            = 0.1
@@ -89,6 +92,9 @@
 
 [PcdsFeatureFlag]
   gEmbeddedTokenSpaceGuid.PcdAndroidBootLoadFile2|TRUE
+!ifdef CONFIG_L4T_LAUNCHER_QUIET_MODE
+  gNVIDIATokenSpaceGuid.PcdL4TLauncherQuietMode|TRUE
+!endif
 
 [PcdsFixedAtBuild]
   gArmTokenSpaceGuid.PcdMmBufferSize|65536

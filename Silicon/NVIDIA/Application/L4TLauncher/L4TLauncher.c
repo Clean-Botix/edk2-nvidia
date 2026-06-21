@@ -2729,6 +2729,9 @@ L4TLauncher (
     }
 
     if (BootParams.BootMode == NVIDIA_L4T_BOOTMODE_DIRECT) {
+      if (!FeaturePcdGet (PcdL4TLauncherQuietMode)) {
+        ErrorPrint(L"%a: Attempting Direct Boot\r\n", __FUNCTION__);
+      }
       do {
         Status = ProcessExtLinuxConfig (DeviceHandle, BootParams.BootChain, &ExtLinuxConfig, &RootFsDeviceHandle);
         if (EFI_ERROR (Status)) {

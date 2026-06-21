@@ -24,12 +24,20 @@ class L4TLauncherSettingsManager(NVIDIASettingsManager):
     def GetBootAppName(self):
         return "AARCH64/L4TLauncher.efi"
 
-    def GetBootAppFile(self):
+    def GetTegraImageName(self):
         ws_dir = Path(self.GetWorkspaceRoot())
         image_name_path = ws_dir / self.GetNvidiaConfigRoot() / "ImageName"
-        platform_name = image_name_path.read_text().strip()
+        return image_name_path.read_text().strip()
+
+    def GetBootAppFile(self):
+        platform_name = self.GetTegraImageName()
         target = self.GetTarget()
         return str(Path("images") / f"BOOTAA64_{platform_name}_{target}.efi")
+
+    def GetConfigFiles(self):
+        return [
+            str(Path(self.GetNvidiaConfigRoot()) / self.GetTegraImageName() / "defconfig")
+        ]
 
     def GetDscName(self):
         return self.GetEdk2NvidiaDir() + "Platform/NVIDIA/L4TLauncher/L4TLauncher.dsc"
