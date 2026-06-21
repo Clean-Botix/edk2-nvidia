@@ -7,6 +7,8 @@
 # Stuart build for NVIDIA L4T Launcher
 
 
+from pathlib import Path
+
 from edk2nv.stuart import NVIDIASettingsManager, NVIDIAPlatformBuilder
 
 
@@ -21,6 +23,13 @@ class L4TLauncherSettingsManager(NVIDIASettingsManager):
 
     def GetBootAppName(self):
         return "AARCH64/L4TLauncher.efi"
+
+    def GetBootAppFile(self):
+        ws_dir = Path(self.GetWorkspaceRoot())
+        image_name_path = ws_dir / self.GetNvidiaConfigRoot() / "ImageName"
+        platform_name = image_name_path.read_text().strip()
+        target = self.GetTarget()
+        return str(Path("images") / f"BOOTAA64_{platform_name}_{target}.efi")
 
     def GetDscName(self):
         return self.GetEdk2NvidiaDir() + "Platform/NVIDIA/L4TLauncher/L4TLauncher.dsc"

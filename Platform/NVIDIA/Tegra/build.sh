@@ -16,6 +16,7 @@ set -e
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 PLATFORM_BUILD=${SCRIPT_DIR}/PlatformBuild.py
+L4T_LAUNCHER_PLATFORM_BUILD=${SCRIPT_DIR}/../L4TLauncher/PlatformBuild.py
 HELPER_SCRIPT_DIR=${SCRIPT_DIR}/../../../Silicon/NVIDIA/scripts
 
 # Change directory to the root of the workspace
@@ -24,3 +25,4 @@ cd ${SCRIPT_DIR}/../../../..
 # Prepare and build
 ${HELPER_SCRIPT_DIR}/prepare_stuart.sh ${PLATFORM_BUILD}
 ${HELPER_SCRIPT_DIR}/build_stuart.sh ${PLATFORM_BUILD} $@
+${HELPER_SCRIPT_DIR}/build_stuart.sh ${L4T_LAUNCHER_PLATFORM_BUILD}
