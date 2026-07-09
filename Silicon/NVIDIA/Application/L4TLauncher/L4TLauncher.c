@@ -1802,13 +1802,20 @@ ProcessBootParams (
     }
   }
 
-  // WORKAROUND: commenting out rootfs validation for disabling recovery boot mechanism
-  // See: https://forums.developer.nvidia.com/t/jp5-1-2-how-to-disable-uefi-trying-recovery-boot/295225/3
-  // Find valid Rootfs Chain. If not, select recovery kernel
-  // Status = ValidateRootfsStatus (BootParams);
-  // if (EFI_ERROR (Status)) {
-  //   ErrorPrint (L"Failed to validate rootfs status: %r\r\n", Status);
-  // }
+  // Rootfs A/B validation: decrement the active slot's retry count, fail over
+  // A<->B when a slot is exhausted, and (only if all slots are exhausted) request
+  // recovery. Re-enabled per M0.1: the previous "disable recovery boot mechanism"
+  // workaround commented out this whole call, which disabled the ENTIRE rootfs A/B
+  // state machine (retry-count decrement, mark-unbootable, A->B failover) -- not
+  // just recovery -- leaving nvbootctrl slot failover and ROOTFS_RETRY_COUNT_MAX
+  // inert. The spurious-recovery-boot nuisance the workaround targeted
+  // (https://forums.developer.nvidia.com/t/jp5-1-2-how-to-disable-uefi-trying-recovery-boot/295225/3)
+  // is now handled narrowly at the boot dispatch below, where BootMode == RECOVERY
+  // is redirected to a normal-kernel boot instead of the recovery partition.
+  Status = ValidateRootfsStatus (BootParams);
+  if (EFI_ERROR (Status)) {
+    ErrorPrint (L"Failed to validate rootfs status: %r\r\n", Status);
+  }
 
   // Store the current boot chain in volatile variable to allow chain loading
   Status = gRT->SetVariable (BOOT_OS_VARIABLE_NAME, &gNVIDIAPublicVariableGuid, EFI_VARIABLE_BOOTSERVICE_ACCESS|EFI_VARIABLE_RUNTIME_ACCESS, sizeof (BootParams->BootChain), &BootParams->BootChain);
@@ -2800,10 +2807,17 @@ L4TLauncher (
         }
       }
     } else if (BootParams.BootMode == NVIDIA_L4T_BOOTMODE_RECOVERY) {
-      ErrorPrint (L"%a: Attempting Recovery Boot\r\n", __FUNCTION__);
-      Status = BootAndroidStylePartition (DeviceHandle, RECOVERY_BASE_NAME, RECOVERY_DTB_BASE_NAME, &BootParams);
+      // M0.1: the recovery kernel is intentionally NOT booted on this platform.
+      // There is no product recovery kernel; booting it strands the device (the
+      // nuisance the old workaround chased). Rootfs A/B validation/failover in
+      // ProcessBootParams() still runs -- we neuter ONLY this terminal recovery
+      // action, booting the normal kernel of the selected (best-effort) chain
+      // instead. A retry-exhausted-but-intact slot then boots the OS, which resets
+      // the retry counters on a successful boot (self-heal after rapid reboots).
+      ErrorPrint (L"%a: Recovery boot disabled (M0.1); attempting normal kernel boot\r\n", __FUNCTION__);
+      Status = BootAndroidStylePartition (DeviceHandle, BOOTIMG_BASE_NAME, BOOTIMG_DTB_BASE_NAME, &BootParams);
       if (EFI_ERROR (Status)) {
-        ErrorPrint (L"Failed to boot %s:%d partition\r\n", RECOVERY_BASE_NAME, BootParams.BootChain);
+        ErrorPrint (L"Failed to boot %s:%d partition\r\n", BOOTIMG_BASE_NAME, BootParams.BootChain);
       }
     }
   }
